@@ -65,9 +65,9 @@ class TrainsCollection:
                 else:
                     train_dict[dict_header[key]] = '--'
             train_list.append (copy.deepcopy (train_dict))
-        return train_list \
-               @ property
+        return train_list
 
+    @property
     def trains(self):
         for raw_train in self._cut_train ():
             train_no = raw_train['train_number']
