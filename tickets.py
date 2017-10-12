@@ -103,16 +103,18 @@ def cli():
     from_station = stations.get (arguments['<from>'])
     to_station = stations.get (arguments['<to>'])
     date = arguments['<date>']
-    url = 'https://kyfw.12306.cn/otn/leftTicket/queryX?leftTicketDTO.train_date={}&leftTicketDTO.from_station' \
+    url = 'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date={}&leftTicketDTO.from_station' \
           '={}&leftTicketDTO.to_station={}&purpose_codes=ADULT'.format (
         date, from_station, to_station
     )
+    print (url)
     """获取参数"""
     options = ''.join ([
         key for key, value in arguments.items () if value is True
     ])
     urllib3.disable_warnings ()
     r = requests.get (url, verify=False)
+    print (r)
     available_trains = r.json ()['data']['result']
     TrainsCollection (available_trains, options).pretty_print ()
 
